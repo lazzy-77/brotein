@@ -3,6 +3,7 @@ const usersRouter = express.Router();
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import config from 'config';
 import logger from '../../logger/logger.js';
 import pkg from 'express-validator';
 const { check, validationResult } = pkg;
@@ -64,7 +65,21 @@ usersRouter.post(
       await user.save(); // saves user
 
       // Return jsonwebtoken
-      res.send('user registered');
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 360000 }, // change to 3600 for production
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       logger.err(NAMESPACE, 'Authorization Request Failed.', err);
       res.status(500).send('Server error');
