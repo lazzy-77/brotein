@@ -1,9 +1,13 @@
 import config from "config";
 import { app } from "./app.js";
+import logger from './logger/logger.js';
+
 
 // const PORT = process.env.SERVER_PORT || config.get("App.PORT");
 const PORT = process.env.SERVER_PORT || 8080;
 
+const NAMESPACE = "Server";
+
 app.listen(PORT, () => {
-    console.log(`Server started at: http://localhost:${PORT}`);
+    logger.info(NAMESPACE, "Starting server at  http://localhost:" + PORT)
 });

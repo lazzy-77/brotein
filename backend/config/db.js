@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import config from 'config';
+import logger from '../logger/logger.js';
+
 const db = config.get('mongoURI');
+const NAMESPACE = "db.js"
 
 const connectDB = async () => {
-
-  console.log("connecting DB");
-  
   try {
     await mongoose.connect(db, {
       useNewUrlParser: true,
@@ -13,9 +13,9 @@ const connectDB = async () => {
       useCreateIndex: true,
     });
 
-    console.log('MondoDB Connected...');
+    logger.info(NAMESPACE, "Connected to Mongo Successfully")
   } catch (err) {
-    console.error(err.message);
+    logging.error(NAMESPACE, "Authorization Request Failed.", error);
     // Exit process with failure
     process.exit(1);
   }

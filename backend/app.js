@@ -6,10 +6,13 @@ import usersRouter from './routes/api/users.js';
 import authRouter from './routes/api/auth.js';
 import profileRouter from './routes/api/profile.js';
 import postsRouter from './routes/api/post.js';
-
+import logger from './logger/logger.js';
 export const app = express();
 
-// Connect Database
+const NAMESPACE = "App";
+
+// Connect Database\
+logger.info(NAMESPACE, "Connecting to MongoDB")
 connectDB();
 
 // Init Middleware
