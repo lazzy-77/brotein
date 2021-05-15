@@ -3,7 +3,7 @@ const usersRouter = express.Router();
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import logger from '../logger/logger.js';
+import logger from '../../logger/logger.js';
 import pkg from 'express-validator';
 const { check, validationResult } = pkg;
 
@@ -59,14 +59,14 @@ usersRouter.post(
       // Encrypt password
       const salt = await bcrypt.genSalt(10); // creates hash and puts it into user password
 
-      user.password = await bcrypt.hash(password, salt);
+      user.password = await bcrypt.hash(password.toString(), salt);
 
       await user.save(); // saves user
 
       // Return jsonwebtoken
       res.send('user registered');
     } catch (err) {
-      logging.error(NAMESPACE, 'Authorization Request Failed.', error);
+      logger.err(NAMESPACE, 'Authorization Request Failed.', err);
       res.status(500).send('Server error');
     }
   }
