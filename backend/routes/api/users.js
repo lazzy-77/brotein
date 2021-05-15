@@ -2,11 +2,12 @@ import express from 'express';
 const usersRouter = express.Router();
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
-import pkg from 'express-validator/check/index.js';
+import jwt from 'jsonwebtoken';
 import logger from '../logger/logger.js';
+import pkg from 'express-validator';
 const { check, validationResult } = pkg;
 
-const NAMESPACE = "user.js"
+const NAMESPACE = 'user.js';
 
 import User from '../../models/User.js';
 
@@ -36,36 +37,36 @@ usersRouter.post(
       let user = await User.findOne({ email });
 
       if (user) {
-        res.status(400).json({ errors: [{ msg: 'User already exists!' }] });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'User already exists' }] });
       }
 
-      // Get users profile pic (gravatar)
+      // Get users gravatar
       const pfp = gravatar.url(email, {
-        s: '200', // size
+        s: '200', // default size
         r: 'pg', // rating
-        d: 'mm', // default image
+        d: 'mm', // default icon
       });
 
       user = new User({
         name,
         email,
-        pfp,
         password,
+        pfp,
       });
 
       // Encrypt password
-      const salt = await bcrypt.genSalt(10);
+      const salt = await bcrypt.genSalt(10); // creates hash and puts it into user password
 
       user.password = await bcrypt.hash(password, salt);
 
-      await user.save();
+      await user.save(); // saves user
 
       // Return jsonwebtoken
-      logging.info(NAMESPACE, "User Added.");
-
-      res.send('User registered');
+      res.send('user registered');
     } catch (err) {
-      logging.error(NAMESPACE, "Authorization Request Failed.", error);
+      logging.error(NAMESPACE, 'Authorization Request Failed.', error);
       res.status(500).send('Server error');
     }
   }
