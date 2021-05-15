@@ -1,13 +1,9 @@
-import express from 'express';
-import connectDB from './config/db.js';
+import config from "config";
+import { app } from "./app.js";
 
-const app = express();
+// const PORT = process.env.SERVER_PORT || config.get("App.PORT");
+const PORT = process.env.SERVER_PORT || 8080;
 
-// Connect Database
-connectDB();
-
-app.get('/', (req, res) => res.send('API Running'));
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server started at: http://localhost:${PORT}`);
+});
