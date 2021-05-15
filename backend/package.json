@@ -2,13 +2,19 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "brotein backend",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "watch": "nodemon ./server.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "brotein team",
   "license": "MIT",

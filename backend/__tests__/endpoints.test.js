@@ -1,16 +1,11 @@
-import { app } from "../server.js";
+import { app } from "../app.js";
 import request from "supertest";
 
-describe('Sample Test', () => {
-    it('should test that true === true', () => {
-      expect(true).toBe(true)
-    })
-  })
 
-describe("Test the root path", () => {
-  test("It should response the GET method", () => {
+describe("Checking health check endpoint", () => {
+  test("When get request is sent a 200 should be returned", () => {
     return request(app)
-      .get("/")
+      .get("/api/ping")
       .then(response => {
         expect(response.statusCode).toBe(200);
       });

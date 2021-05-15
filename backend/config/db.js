@@ -3,6 +3,9 @@ import config from 'config';
 const db = config.get('mongoURI');
 
 const connectDB = async () => {
+
+  console.log("connecting DB");
+  
   try {
     await mongoose.connect(db, {
       useNewUrlParser: true,
