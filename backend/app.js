@@ -1,7 +1,7 @@
 import express from 'express';
 import connectDB from './config/db.js';
 
-import {ping} from './routes/api/ping.js'
+import { ping } from './routes/api/ping.js';
 import usersRouter from './routes/api/users.js';
 import authRouter from './routes/api/auth.js';
 import profileRouter from './routes/api/profile.js';
@@ -10,10 +10,10 @@ import postsRouter from './routes/api/post.js';
 export const app = express();
 
 // Connect Database
-// connectDB();
+connectDB();
 
 // Init Middleware
-// app.use(express.json({ extended: false }));
+app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('API Running'));
 
