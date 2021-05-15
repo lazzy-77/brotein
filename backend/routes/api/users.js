@@ -3,7 +3,10 @@ const usersRouter = express.Router();
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import pkg from 'express-validator/check/index.js';
+import logger from '../logger/logger.js';
 const { check, validationResult } = pkg;
+
+const NAMESPACE = "user.js"
 
 import User from '../../models/User.js';
 
@@ -58,10 +61,11 @@ usersRouter.post(
       await user.save();
 
       // Return jsonwebtoken
+      logging.info(NAMESPACE, "User Added.");
 
       res.send('User registered');
     } catch (err) {
-      console.error(err.message);
+      logging.error(NAMESPACE, "Authorization Request Failed.", error);
       res.status(500).send('Server error');
     }
   }
