@@ -13,7 +13,7 @@ const NAMESPACE = 'user.js';
 import User from '../../models/User.js';
 
 // @route   GET api/users
-// @desc    Test route
+// @desc    Register User
 // @access  Public
 usersRouter.post(
   '/',

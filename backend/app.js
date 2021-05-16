@@ -9,10 +9,10 @@ import postsRouter from './routes/api/post.js';
 import logger from './logger/logger.js';
 export const app = express();
 
-const NAMESPACE = "App";
+const NAMESPACE = 'App';
 
 // Connect Database\
-logger.info(NAMESPACE, "Connecting to MongoDB")
+logger.info(NAMESPACE, 'Connecting to MongoDB');
 connectDB();
 
 // Init Middleware
