@@ -3,7 +3,7 @@ import config from 'config';
 import logger from '../logger/logger.js';
 
 const db = config.get('mongoURI');
-const NAMESPACE = "db.js"
+const NAMESPACE = 'db.js';
 
 const connectDB = async () => {
   try {
@@ -11,11 +11,12 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     });
 
-    logger.info(NAMESPACE, "Connected to Mongo Successfully")
+    logger.info(NAMESPACE, 'Connected to Mongo Successfully');
   } catch (err) {
-    logging.error(NAMESPACE, "Authorization Request Failed.", error);
+    logging.error(NAMESPACE, 'Authorization Request Failed.', error);
     // Exit process with failure
     process.exit(1);
   }

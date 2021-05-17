@@ -2,7 +2,7 @@ import express from 'express';
 import connectDB from './config/db.js';
 
 import { ping } from './routes/api/ping.js';
-import {usersRouter} from './routes/api/users.js';
+import usersRouter from './routes/api/users.js';
 import authRouter from './routes/api/auth.js';
 import profileRouter from './routes/api/profile.js';
 import postsRouter from './routes/api/post.js';
@@ -22,9 +22,7 @@ app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
 app.get('/api/ping', ping);
-app.post('/api/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/posts', postsRouter);
-
-// Define Routes

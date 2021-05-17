@@ -20,18 +20,19 @@ const ProfileSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  Weight: {
+  weight: {
     type: Number,
     required: true,
   },
   log_entries: [
     {
-      logId: {
-        type: Number,
-        required: true,
-      },
+      // logId: {
+      //   type: Number,
+      //   required: true,
+      // },
       logs: {
         type: [String],
+        required: true,
       },
       date_of_log: {
         type: Date,
@@ -39,10 +40,6 @@ const ProfileSchema = new mongoose.Schema({
       },
     },
   ],
-  date: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
 const Profile = mongoose.model('profile', ProfileSchema);
