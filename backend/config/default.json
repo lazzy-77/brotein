@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://broteam:bro123@brotein-app.lrdg3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
+}
